@@ -1,5 +1,5 @@
 .App {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   height: 100vh;
@@ -15,13 +15,12 @@
   background: lightgray;
 }
 
-.about {
+.App-about {
   background: black;
 }
 
 .App > div:nth-of-type(3) {
   flex: 0 0 30%;
-
   color: white;
 }
 

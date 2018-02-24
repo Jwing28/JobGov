@@ -1,7 +1,3 @@
-import React, { Component } from 'react';
+import React from "react";
 
-export default () => (
-	<div>
-		Map
-	</div>
-);
+export default props => <div className={props.componentClass}>Map</div>;
