@@ -35,6 +35,7 @@ class App extends Component {
         //apply jobdata to job section
         //latlng to map
         let { jobData, latlng } = result.data;
+        console.log(jobData, latlng);
       })
       .catch(error => console.log("error: ", error));
   };
@@ -99,32 +100,3 @@ class App extends Component {
 }
 
 export default App;
-
-// axios
-//   .get(jobUrl)
-//   .then(jobData => {
-//     //* * * probably should pass all of this to child component.
-//     //result.data is an array. result.data.map -> job
-//     //job.locations[0] gives "city, state"
-//     //job.organization_name
-//     //job.position_title
-//     //job.start_date
-//     //job.url
-//
-//     //test one location
-//
-//     let [city, state] = jobData.data[0].locations[0].split(","); //['Tampa','FL']
-//     let locationURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}&key=AIzaSyA9cf1dlbUDpsPGSIMCO6Q8XS0vgHtqoqM`;
-//     console.log(jobData);
-//     //took result from gov jobs and passing city / state here
-//     return axios.get(locationURL);
-//   })
-//   .then(latlong => {
-//     //latlong.data.result[0].geometry.location -> .lat or .lng
-//     let { lat, lng } = latlong.data.results[0].geometry.location;
-//     lat = parseInt(lat, 10);
-//     lng = parseInt(lng, 10);
-//
-//     this.setState({ lat: lat, lng: lng }); //react-google-maps requires number values
-//   })
-//   .catch(error => console.log("error", error));

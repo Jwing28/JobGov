@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const port = 8080;
 const app = express();
-require("dotenv").config();
+const env = require("env2")(".env");
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -37,9 +37,14 @@ app.get("/jobs", (req, res) => {
     })
     .then(latlng => {
       latlng.forEach(location => {
-        location.data.results.forEach(city => {
-          coordinates.push(city.geometry.location);
-        });
+        if (location.data.results.length) {
+          location.data.results.forEach(city => {
+            coordinates.push(city.geometry.location);
+          });
+        } else {
+          //api returned no location for city
+          coordinates.push({ lat: 0, lng: 0 });
+        }
       });
       res.send({ jobData: jobData, latlng: coordinates });
     })
