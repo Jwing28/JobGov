@@ -24,18 +24,39 @@ class App extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    const jobUrl = `https://jobs.search.gov/jobs/search.json?query=${
+      this.state.title
+    }+jobs+in+${this.state.location}`;
+    const latlngRequests = [];
+    let coordinates = [],
+      jobData = [];
+
     axios
-      .get("http://localhost:8080/jobs", {
-        params: {
-          jobData: { title: this.state.title, location: this.state.location }
-        }
-      })
+      .get(jobUrl)
       .then(result => {
-        //result.data.jobdata & result.data.latlng
-        //apply jobdata to job section
-        //latlng to map
-        let { jobData, latlng } = result.data;
-        console.log(jobData, latlng);
+        jobData = result.data;
+        jobData.forEach(job => {
+          let [city, state] = job.locations[0].split(",");
+          //gh-pages doesn't host node
+          let geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}&key=AIzaSyA9cf1dlbUDpsPGSIMCO6Q8XS0vgHtqoqM`;
+          latlngRequests.push(axios.get(geocodeUrl));
+        });
+        //google maps geolocation requests
+        return axios.all(latlngRequests);
+      })
+      .then(latlng => {
+        latlng.forEach(location => {
+          if (location.data.results.length) {
+            location.data.results.forEach(city => {
+              coordinates.push(city.geometry.location);
+            });
+          } else {
+            //api returned no location for city, provide default location
+            //later not to user this is not a valid location
+            coordinates.push({ lat: 0, lng: 0 });
+          }
+        });
+        console.log(jobData, coordinates);
       })
       .catch(error => console.log("error: ", error));
   };
