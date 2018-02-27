@@ -11,8 +11,8 @@ class App extends Component {
   state = {
     title: "",
     location: "",
-    lat: 0,
-    lng: 0
+    jobDetails: [],
+    coordinates: []
   };
   // getValidationState() {
   //   const length = this.state.value.length;
@@ -57,6 +57,7 @@ class App extends Component {
           }
         });
         console.log(jobData, coordinates);
+        this.setState({ jobDetails: jobData, coordinates: coordinates });
       })
       .catch(error => console.log("error: ", error));
   };
@@ -104,13 +105,9 @@ class App extends Component {
         <Jobs States={States} componentClass="App-jobs" />
         <Map
           isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          location={
-            this.state.lat
-              ? { lat: this.state.lat, lng: this.state.lng }
+          locations={
+            this.state.coordinates
+              ? this.state.coordinates
               : { lat: -34.397, lng: 150.644 }
           }
         />

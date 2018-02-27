@@ -1,35 +1,47 @@
 import React from "react";
+import { compose, withProps } from "recompose";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker
 } from "react-google-maps";
+/*
+  {props.isMarkerShown && (
+    <Marker position={{ lat: -34.397, lng: 150.644 }} />
+  )}
+*/
 
-//going to need to loop through each pair of lat/lng
-//to create x number of markers on the map...
-// {props.isMarkerShown && (props.markers.map(marker=> {
-//   <Marker position={{ lat: marker.lat, lng: marker.lng }} />
-// }))}
-
-const Map = withScriptjs(
-  withGoogleMap(props => (
-    <GoogleMap
-      defaultZoom={7}
-      defaultCenter={{ lat: props.location.lat, lng: props.location.lng }}
-      center={{ lat: props.location.lat, lng: props.location.lng }}
-    >
-      {props.isMarkerShown && (
-        <Marker
-          position={{ lat: props.location.lat, lng: props.location.lng }}
-        />
-      )}
-    </GoogleMap>
-  ))
-);
+const Map = compose(
+  withProps({
+    googleMapURL:
+      "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props => (
+  <GoogleMap
+    defaultZoom={7}
+    center={
+      props.locations.length
+        ? { lat: props.locations[0].lat, lng: props.locations[0].lng }
+        : { lat: -34.397, lng: 150.644 }
+    }
+  >
+    {props.isMarkerShown && props.locations.length ? (
+      props.locations.map((location, idx) => {
+        return <Marker key={idx} position={location} />;
+      })
+    ) : (
+      <Marker
+        title="Example Marker"
+        position={{ lat: -34.397, lng: 150.644 }}
+      />
+    )}
+  </GoogleMap>
+));
 
 export default Map;
-
-//export default props => <div className={props.componentClass}>Map</div>;
-
-//lat: -34.397, lng: 150.644
