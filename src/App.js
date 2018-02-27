@@ -102,7 +102,12 @@ class App extends Component {
             </Button>
           </FormGroup>
         </form>
-        <Jobs States={States} componentClass="App-jobs" />
+        <Jobs
+          States={States}
+          jobType={this.state.title}
+          jobDetails={this.state.jobDetails}
+          componentClass="App-jobs"
+        />
         <Map
           isMarkerShown
           locations={
