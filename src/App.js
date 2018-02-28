@@ -5,31 +5,28 @@ import About from "./About";
 import Jobs from "./jobs/Jobs";
 import Map from "./map/Map";
 import States from "./data/states";
-import { Button, FormGroup, FormControl } from "react-bootstrap";
+import { Button, FormGroup, FormControl, Tooltip } from "react-bootstrap";
 
 class App extends Component {
   state = {
     title: "",
     location: "",
     jobDetails: [],
-    coordinates: []
+    coordinates: [],
+    error: false
   };
-  // getValidationState() {
-  //   const length = this.state.value.length;
-  //   if (length > 10) return "success";
-  //   else if (length > 5) return "warning";
-  //   else if (length > 0) return "error";
-  //   return null;
-  // }
 
   onSubmit = e => {
     e.preventDefault();
+    const latlngRequests = [];
+    let coordinates = [];
+    let jobData = [];
     const jobUrl = `https://jobs.search.gov/jobs/search.json?query=${
       this.state.title
     }+jobs+in+${this.state.location}`;
-    const latlngRequests = [];
-    let coordinates = [],
-      jobData = [];
+    if (this.state.error) {
+      this.setState({ error: !this.state.error });
+    }
 
     axios
       .get(jobUrl)
@@ -56,8 +53,11 @@ class App extends Component {
             coordinates.push({ lat: 0, lng: 0 });
           }
         });
-        console.log(jobData, coordinates);
-        this.setState({ jobDetails: jobData, coordinates: coordinates });
+        if (jobData.length) {
+          this.setState({ jobDetails: jobData, coordinates: coordinates });
+        } else {
+          this.setState({ error: !this.state.error });
+        }
       })
       .catch(error => console.log("error: ", error));
   };
@@ -78,6 +78,7 @@ class App extends Component {
               value={this.state.title}
               onChange={this.onInputChange}
               placeholder="Job Title:"
+              required
             />
 
             <FormControl
@@ -87,6 +88,7 @@ class App extends Component {
               onChange={this.onInputChange}
               placeholder="State:"
               list="States"
+              required
             />
             <datalist id="States">
               {States.map(state => (
@@ -102,6 +104,13 @@ class App extends Component {
             </Button>
           </FormGroup>
         </form>
+        {this.state.error ? (
+          <div>
+            <Tooltip placement="right" className="in" id="tooltip-right">
+              Sorry, we could not find that job, please attempt again.
+            </Tooltip>
+          </div>
+        ) : null}
         <div className="App-results">
           <Jobs
             States={States}

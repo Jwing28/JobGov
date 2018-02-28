@@ -1,19 +1,9 @@
 import React from "react";
 import { Panel, PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 
-/*
-  props.jobData
-    for every object in array: job
-      job.start_date
-      job.organization_name
-      job.position_title
-      job.locations[0]
-      job.url
-*/
-
 const Jobs = props => (
   <div className={props.componentClass}>
-    <PageHeader>Job Results:</PageHeader>;
+    <PageHeader>Job Results:</PageHeader>
     <Panel>
       <Panel.Heading>
         <Panel.Title>Type: {props.jobType}</Panel.Title>
@@ -41,7 +31,7 @@ const Jobs = props => (
               </ListGroupItem>
             </ListGroup>
           ))
-        : ""}
+        : null}
     </Panel>
   </div>
 );
