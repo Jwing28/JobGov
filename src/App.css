@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 100vh;
+  height: 90vh;
 }
 
 .App-user-input {
@@ -13,6 +13,7 @@
 .App-jobs {
   flex: 0 0 100%;
   border-right: 2px solid lightblue;
+  overflow: scroll;
 }
 
 .App > div:nth-of-type(2) {
@@ -32,6 +33,15 @@
 
 .App-about * {
   margin-top: 2%;
+}
+
+.form-group {
+  margin-bottom: 0;
+  margin-top: 2%;
+}
+
+.btn-success {
+  width: 100%;
 }
 
 @media (max-width: 760px) {

@@ -3,10 +3,10 @@ import { Panel, PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 
 const Jobs = props => (
   <div className={props.componentClass}>
-    <PageHeader>Job Results:</PageHeader>
+    <PageHeader>{"Gov't Search Results:"}</PageHeader>
     <Panel>
       <Panel.Heading>
-        <Panel.Title>Type: {props.jobType}</Panel.Title>
+        <Panel.Title>Job Title: {props.jobType}</Panel.Title>
       </Panel.Heading>
       {props.jobDetails.length
         ? props.jobDetails.map((job, idx) => (
