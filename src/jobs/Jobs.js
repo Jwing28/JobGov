@@ -1,4 +1,5 @@
 import React from "react";
+import formatDate from "../utils/utils";
 import { Panel, PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 
 const Jobs = props => (
@@ -17,7 +18,10 @@ const Jobs = props => (
               <ListGroupItem>
                 Organization: {job.organization_name}
               </ListGroupItem>
-              <ListGroupItem>Start: {job.start_date}</ListGroupItem>
+              <ListGroupItem>
+                Application Window: {formatDate(job.start_date)} -{" "}
+                {formatDate(job.end_date)}
+              </ListGroupItem>
               <ListGroupItem>
                 {job.locations[0].split(",")[0] +
                   ", " +
