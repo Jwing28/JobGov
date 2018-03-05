@@ -5,7 +5,14 @@ import About from "./About";
 import Jobs from "./jobs/Jobs";
 import Map from "./map/Map";
 import States from "./data/states";
-import { Button, FormGroup, FormControl, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  ControlLabel,
+  Form,
+  FormGroup,
+  FormControl,
+  Tooltip
+} from "react-bootstrap";
 
 class App extends Component {
   state = {
@@ -70,23 +77,24 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <form onSubmit={this.onSubmit} className="App-user-input">
+        <Form onSubmit={this.onSubmit} className="App-user-input" inline>
           <FormGroup>
+            <ControlLabel>Job Title</ControlLabel>{" "}
             <FormControl
               type="text"
               name="title"
               value={this.state.title}
               onChange={this.onInputChange}
-              placeholder="Job Title:"
+              placeholder="enter title or keyword"
               required
             />
-
+            <ControlLabel>State</ControlLabel>{" "}
             <FormControl
               type="text"
               name="location"
               value={this.state.location}
               onChange={this.onInputChange}
-              placeholder="State:"
+              placeholder="type or use dropdown"
               list="States"
               required
             />
@@ -103,7 +111,7 @@ class App extends Component {
               Search
             </Button>
           </FormGroup>
-        </form>
+        </Form>
         {this.state.error ? (
           <div>
             <Tooltip placement="right" className="in" id="tooltip-right">

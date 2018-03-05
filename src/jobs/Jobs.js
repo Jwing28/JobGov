@@ -10,8 +10,8 @@ const Jobs = props => (
         <Panel.Title>Job Title: {props.jobType}</Panel.Title>
       </Panel.Heading>
       {props.jobDetails.length
-        ? props.jobDetails.map((job, idx) => (
-            <ListGroup key={idx}>
+        ? props.jobDetails.map(job => (
+            <ListGroup key={job.id}>
               <ListGroupItem bsStyle="info">
                 Title: {job.position_title}
               </ListGroupItem>
