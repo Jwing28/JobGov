@@ -1,13 +1,6 @@
-.App-results {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  height: 90vh;
-}
-
 .App-user-input {
   display: flex;
-  background: lightgreen;
+  background: lightblue;
   flex-direction: row;
   justify-content: center;
 }
@@ -16,25 +9,7 @@
   flex: 0 0 100%;
   border-right: 2px solid lightblue;
   overflow: scroll;
-}
-
-.App > div:nth-of-type(2) {
-  flex: 0 0 70%;
-}
-
-.App-about {
-  flex: 0 0 30%;
-  font-size: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  color: black;
-  margin-top: 5%;
-}
-
-.App-about * {
-  margin-top: 2%;
+  height: 90vh;
 }
 
 .form-group {
@@ -47,17 +22,23 @@
   margin-right: 1%;
 }
 
-input.form-control {
-  width: 2%;
-}
-
 /* required, by default react-bootstrap has inline form width as auto */
-.btn-success {
+.form-control {
   width: 20% !important;
 }
 
-@media (max-width: 760px) {
-  .App-results {
-    flex-wrap: nowrap;
-  }
+/* required, by default react-bootstrap has inline form width as auto */
+.btn-primary {
+  width: 10% !important;
+}
+
+.col-md-10.col-xs-12 {
+  padding-right: 0px;
+}
+
+.col-md-2.col-xs-12 {
+  background-color: lightblue;
+  margin-top: 0px;
+  padding-top: 1%;
+  padding-bottom: 1.3%;
 }

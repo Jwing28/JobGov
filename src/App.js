@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
-import About from "./About";
 import Jobs from "./jobs/Jobs";
 import Map from "./map/Map";
 import States from "./data/states";
 import {
   Button,
+  Col,
   ControlLabel,
   Form,
   FormGroup,
   FormControl,
+  Grid,
+  Row,
   Tooltip
 } from "react-bootstrap";
 
@@ -76,69 +78,142 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Form onSubmit={this.onSubmit} className="App-user-input" inline>
-          <FormGroup>
-            <ControlLabel>Job Title</ControlLabel>{" "}
-            <FormControl
-              type="text"
-              name="title"
-              value={this.state.title}
-              onChange={this.onInputChange}
-              placeholder="enter title or keyword"
-              required
-            />
-            <ControlLabel>State</ControlLabel>{" "}
-            <FormControl
-              type="text"
-              name="location"
-              value={this.state.location}
-              onChange={this.onInputChange}
-              placeholder="type or use dropdown"
-              list="States"
-              required
-            />
-            <datalist id="States">
-              {States.map(state => (
-                <option
-                  key={state}
-                  value={state}
-                  onSelect={this.onInputChange}
+      <Grid>
+        <Row className="show-grid">
+          <Col xs={12} md={12}>
+            <Form onSubmit={this.onSubmit} className="App-user-input" inline>
+              <FormGroup>
+                <ControlLabel>Job Title</ControlLabel>{" "}
+                <FormControl
+                  type="text"
+                  name="title"
+                  value={this.state.title}
+                  onChange={this.onInputChange}
+                  placeholder="enter title or keyword"
+                  required
                 />
-              ))}
-            </datalist>
-            <Button bsStyle="success" type="submit">
-              Search
-            </Button>
-          </FormGroup>
-        </Form>
-        {this.state.error ? (
-          <div>
-            <Tooltip placement="right" className="in" id="tooltip-right">
-              Sorry, we could not find that job, please attempt again.
-            </Tooltip>
-          </div>
-        ) : null}
-        <div className="App-results">
-          <Jobs
-            States={States}
-            jobType={this.state.title}
-            jobDetails={this.state.jobDetails}
-            componentClass="App-jobs"
-          />
-          <Map
-            isMarkerShown
-            locations={
-              this.state.coordinates
-                ? this.state.coordinates
-                : { lat: -34.397, lng: 150.644 }
-            }
-          />
-          <About componentClass="App-about" />
-        </div>
-      </div>
+                <ControlLabel>State</ControlLabel>{" "}
+                <FormControl
+                  type="text"
+                  name="location"
+                  value={this.state.location}
+                  onChange={this.onInputChange}
+                  placeholder="type or use dropdown"
+                  list="States"
+                  required
+                />
+                <datalist id="States">
+                  {States.map(state => (
+                    <option
+                      key={state}
+                      value={state}
+                      onSelect={this.onInputChange}
+                    />
+                  ))}
+                </datalist>
+                <Button bsStyle="primary" type="submit">
+                  Search
+                </Button>
+              </FormGroup>
+            </Form>
+          </Col>
+          {this.state.error ? (
+            <div>
+              <Tooltip placement="right" className="in" id="tooltip-right">
+                Sorry, we could not find that job, please attempt again.
+              </Tooltip>
+            </div>
+          ) : null}
+        </Row>
+        <Row className="show-grid">
+          <Col xs={12} md={3}>
+            <Jobs
+              States={States}
+              jobType={this.state.title}
+              jobDetails={this.state.jobDetails}
+              componentClass="App-jobs"
+            />
+          </Col>
+          <Col xs={12} md={9}>
+            <Map
+              isMarkerShown
+              locations={
+                this.state.coordinates
+                  ? this.state.coordinates
+                  : { lat: -34.397, lng: 150.644 }
+              }
+            />
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
 
 export default App;
+
+/*
+
+<div className="App">
+  <Form onSubmit={this.onSubmit} className="App-user-input" inline>
+    <FormGroup>
+      <ControlLabel>Job Title</ControlLabel>{" "}
+      <FormControl
+        type="text"
+        name="title"
+        value={this.state.title}
+        onChange={this.onInputChange}
+        placeholder="enter title or keyword"
+        required
+      />
+      <ControlLabel>State</ControlLabel>{" "}
+      <FormControl
+        type="text"
+        name="location"
+        value={this.state.location}
+        onChange={this.onInputChange}
+        placeholder="type or use dropdown"
+        list="States"
+        required
+      />
+      <datalist id="States">
+        {States.map(state => (
+          <option
+            key={state}
+            value={state}
+            onSelect={this.onInputChange}
+          />
+        ))}
+      </datalist>
+      <Button bsStyle="success" type="submit">
+        Search
+      </Button>
+    </FormGroup>
+  </Form>
+  {this.state.error ? (
+    <div>
+      <Tooltip placement="right" className="in" id="tooltip-right">
+        Sorry, we could not find that job, please attempt again.
+      </Tooltip>
+    </div>
+  ) : null}
+  <div className="App-results">
+    <Jobs
+      States={States}
+      jobType={this.state.title}
+      jobDetails={this.state.jobDetails}
+      componentClass="App-jobs"
+    />
+    <Map
+      isMarkerShown
+      locations={
+        this.state.coordinates
+          ? this.state.coordinates
+          : { lat: -34.397, lng: 150.644 }
+      }
+    />
+    <About componentClass="App-about" />
+  </div>
+</div>
+
+*/

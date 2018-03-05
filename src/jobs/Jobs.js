@@ -4,7 +4,7 @@ import { Panel, PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 
 const Jobs = props => (
   <div className={props.componentClass}>
-    <PageHeader>{"Gov't Search Results:"}</PageHeader>
+    <PageHeader>{"USA Jobs"}</PageHeader>
     <Panel>
       <Panel.Heading>
         <Panel.Title>Job Title: {props.jobType}</Panel.Title>
@@ -28,9 +28,8 @@ const Jobs = props => (
                   job.locations[0].split(",")[1]}
               </ListGroupItem>
               <ListGroupItem>
-                Link:{" "}
                 <a href={job.url} target="_blank">
-                  {job.url}
+                  {"Click here for full description"}
                 </a>
               </ListGroupItem>
             </ListGroup>
