@@ -1,41 +1,55 @@
 import React from "react";
 import formatDate from "../utils/utils";
-import { Panel, PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import {
+  Panel,
+  PageHeader,
+  ListGroup,
+  ListGroupItem,
+  Tab,
+  Tabs
+} from "react-bootstrap";
 
 const Jobs = props => (
   <div className={props.componentClass}>
     <PageHeader>{"USA Jobs"}</PageHeader>
-    <Panel>
-      <Panel.Heading>
-        <Panel.Title>Job Title: {props.jobType}</Panel.Title>
-      </Panel.Heading>
-      {props.jobDetails.length
-        ? props.jobDetails.map(job => (
-            <ListGroup key={job.id}>
-              <ListGroupItem bsStyle="info">
-                Title: {job.position_title}
-              </ListGroupItem>
-              <ListGroupItem>
-                Organization: {job.organization_name}
-              </ListGroupItem>
-              <ListGroupItem>
-                Application Window: {formatDate(job.start_date)} -{" "}
-                {formatDate(job.end_date)}
-              </ListGroupItem>
-              <ListGroupItem>
-                {job.locations[0].split(",")[0] +
-                  ", " +
-                  job.locations[0].split(",")[1]}
-              </ListGroupItem>
-              <ListGroupItem>
-                <a href={job.url} target="_blank">
-                  {"Click here for full description"}
-                </a>
-              </ListGroupItem>
-            </ListGroup>
-          ))
-        : null}
-    </Panel>
+    {props.jobDetails.length ? (
+      <Panel>
+        <Tabs defaultActiveKey={3} id="uncontrolled-tab-example">
+          <Tab eventKey={1} title="Jobs">
+            {props.jobDetails.map(job => (
+              <ListGroup key={job.id}>
+                <ListGroupItem bsStyle="info">
+                  {job.position_title}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Organization: {job.organization_name}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Application Window: {formatDate(job.start_date)} -{" "}
+                  {formatDate(job.end_date)}
+                </ListGroupItem>
+                <ListGroupItem>
+                  {job.locations[0].split(",")[0] +
+                    ", " +
+                    job.locations[0].split(",")[1]}
+                </ListGroupItem>
+                <ListGroupItem>
+                  <a href={job.url} target="_blank">
+                    {"Click here for full description"}
+                  </a>
+                </ListGroupItem>
+              </ListGroup>
+            ))}
+          </Tab>
+          <Tab eventKey={2} title="Fun">
+            Tab 2 - Things to do
+          </Tab>
+          <Tab eventKey={3} title="Crime">
+            Tab 3 - crime heat map
+          </Tab>
+        </Tabs>
+      </Panel>
+    ) : null}
   </div>
 );
 
