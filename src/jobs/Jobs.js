@@ -1,5 +1,7 @@
 import React from "react";
 import formatDate from "../utils/utils";
+import Fun from "./fun/Fun";
+import Crime from "./crime/Crime";
 import {
   Panel,
   PageHeader,
@@ -42,10 +44,10 @@ const Jobs = props => (
             ))}
           </Tab>
           <Tab eventKey={2} title="Fun">
-            Tab 2 - Things to do
+            <Fun />
           </Tab>
           <Tab eventKey={3} title="Crime">
-            Tab 3 - crime heat map
+            <Crime />
           </Tab>
         </Tabs>
       </Panel>
