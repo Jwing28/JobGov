@@ -22,6 +22,7 @@ class App extends Component {
     location: "",
     jobDetails: [],
     coordinates: [],
+    cityAttractions: [],
     error: false
   };
 
@@ -75,18 +76,6 @@ class App extends Component {
         }
       })
       .catch(error => console.log("error: ", error));
-
-    //take the state provided by user - this.state.location?
-    //locations request by the state. - 1 get request
-    //filter out any that end with location state not matching state from user -last item in split
-    //filter out any where country_name !== 'United States'
-    //take every city returned and make a request for each one! - x<= 5 requests
-    //using entity id and entity type
-    //will get back a huge response of attractions in each
-    //we want to render out under fun tab
-    //popularity, nightlife_index, top_cuisines, num_restaurant (that's it!!)
-
-    //state-> arr of cities (entity id&type)-> attractions in each city.
     axios
       .get(zomatoLocationURL, {
         headers: {
@@ -104,22 +93,6 @@ class App extends Component {
             );
           }
         );
-        console.log("check locations arr", locations);
-        /*
-function getUserAccount() {
-  return axios.get('/user/12345');
-}
-
-function getUserPermissions() {
-  return axios.get('/user/12345/permissions');
-}
-
-axios.all([getUserAccount(), getUserPermissions()])
-  .then(axios.spread(function (acct, perms) {
-    // Both requests are now complete
-  }));
-*/
-
         //now you have all locations in us that match the state user provided
         locations.forEach(location => {
           let zomatoLocationDetailsURL = `https://developers.zomato.com/api/v2.1/location_details?entity_id=${
@@ -134,11 +107,11 @@ axios.all([getUserAccount(), getUserPermissions()])
             })
           );
         });
-        console.log("loc det ", locationDetailRequests);
         return axios.all(locationDetailRequests); //get all location details
       })
       .then(locationDetailResponse => {
         console.log("loc det ???", locationDetailResponse);
+        this.setState({ cityAttractions: locationDetailResponse });
       })
       .catch(error => console.log(`An error occurred with yelp: ${error}`));
   };
@@ -203,6 +176,7 @@ axios.all([getUserAccount(), getUserPermissions()])
               States={States}
               jobType={this.state.title}
               jobDetails={this.state.jobDetails}
+              cityDetails={this.state.cityAttractions}
               componentClass="App-jobs"
             />
           </Col>
