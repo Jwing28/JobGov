@@ -23,6 +23,7 @@ class App extends Component {
     jobDetails: [],
     coordinates: [],
     cityAttractions: [],
+    stateCrimeData: [],
     error: false
   };
 
@@ -39,10 +40,28 @@ class App extends Component {
     }&count=5`;
     const zomatoKey = "3fbaba438ee77b85d793b1814f7423df";
     let locationDetailRequests = [];
+    //retrieve crime data first because user has already selected the state
+    let crimeURL = `https://api.usa.gov/crime/fbi/ucr/estimates/states/${
+      StateData.stateAbbreviations[this.state.location]
+    }?page=1&per_page=29&output=json&api_key=6p1cCPtlsMObrbKOzjvs4PmPALwbI923pS1RqEFJ`;
 
+    //make error known to user
     if (this.state.error) {
       this.setState({ error: !this.state.error });
     }
+
+    axios
+      .get(crimeURL, {
+        headers: {
+          Accept: "application/json"
+        }
+      })
+      .then(crimeHistory => {
+        this.setState({ stateCrimeData: crimeHistory.data.results });
+      })
+      .catch(error =>
+        console.log(`Error occurred requesting crime data: ${error}`)
+      );
 
     axios
       .get(jobUrl)
@@ -76,6 +95,7 @@ class App extends Component {
         }
       })
       .catch(error => console.log("error: ", error));
+    //attractions api
     axios
       .get(zomatoLocationURL, {
         headers: {
@@ -107,10 +127,9 @@ class App extends Component {
             })
           );
         });
-        return axios.all(locationDetailRequests); //get all location details
+        return axios.all(locationDetailRequests);
       })
       .then(locationDetailResponse => {
-        console.log("loc det ???", locationDetailResponse);
         this.setState({ cityAttractions: locationDetailResponse });
       })
       .catch(error => console.log(`An error occurred with yelp: ${error}`));
@@ -177,6 +196,8 @@ class App extends Component {
               jobType={this.state.title}
               jobDetails={this.state.jobDetails}
               cityDetails={this.state.cityAttractions}
+              crimeHistory={this.state.stateCrimeData}
+              location={this.state.location || null}
               componentClass="App-jobs"
             />
           </Col>

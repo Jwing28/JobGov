@@ -1,17 +1,10 @@
 import React from "react";
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
 
-//each card is going to have an image on the left
-//and the description will be to its right.
-
-//props.cityDetails
 const Fun = props => {
   if (!props.cityDetails) {
     return "Nothing to see here.";
   }
-  //extract these from each item, and think about how you want to render the cards.
-  //popularity, nightlife_index, top_cuisines,
-  //locationDetailResponse.data. popularity, nightlife_index, top_cuisines(arr),
 
   let attractionCards = props.cityDetails.map(cityDetails => (
     <Panel key={cityDetails.data.subzone_id} bsStyle="success">

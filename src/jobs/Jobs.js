@@ -12,7 +12,6 @@ import {
 } from "react-bootstrap";
 
 const Jobs = props => {
-  console.log("jobs", props);
   return (
     <div className={props.componentClass}>
       <PageHeader>{"USA Jobs"}</PageHeader>
@@ -53,7 +52,12 @@ const Jobs = props => {
               />
             </Tab>
             <Tab eventKey={3} title="Crime">
-              <Crime />
+              <Crime
+                state={props.location || null}
+                crimeHistory={
+                  props.crimeHistory.length ? props.crimeHistory : null
+                }
+              />
             </Tab>
           </Tabs>
         </Panel>
