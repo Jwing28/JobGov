@@ -6,7 +6,6 @@ import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
 
 //props.cityDetails
 const Fun = props => {
-  console.log("fun", props);
   if (!props.cityDetails) {
     return "Nothing to see here.";
   }
@@ -15,7 +14,7 @@ const Fun = props => {
   //locationDetailResponse.data. popularity, nightlife_index, top_cuisines(arr),
 
   let attractionCards = props.cityDetails.map(cityDetails => (
-    <Panel key={cityDetails.data.subzone_id} bsStyle="primary">
+    <Panel key={cityDetails.data.subzone_id} bsStyle="success">
       <Panel.Heading>
         <Panel.Title componentClass="h3">{cityDetails.data.city}</Panel.Title>
       </Panel.Heading>

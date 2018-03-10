@@ -3,7 +3,7 @@ import "./App.css";
 import axios from "axios";
 import Jobs from "./jobs/Jobs";
 import Map from "./map/Map";
-import States from "./data/states";
+import StateData from "./data/states";
 import {
   Button,
   Col,
@@ -148,7 +148,7 @@ class App extends Component {
                   required
                 />
                 <datalist id="States">
-                  {States.map(state => (
+                  {StateData.States.map(state => (
                     <option
                       key={state}
                       value={state}
@@ -173,7 +173,7 @@ class App extends Component {
         <Row className="show-grid">
           <Col xs={12} md={3}>
             <Jobs
-              States={States}
+              States={StateData.States}
               jobType={this.state.title}
               jobDetails={this.state.jobDetails}
               cityDetails={this.state.cityAttractions}
