@@ -12,7 +12,7 @@ const Crime = props => {
       <Panel bsStyle="danger">
         <Panel.Heading>
           <Panel.Title componentClass="h3">
-            {props.state}-{mostRecentYear.year}-Per 100k
+            {props.state}-{mostRecentYear.year}/100k People
           </Panel.Title>
         </Panel.Heading>
         <Table striped bordered condensed hover>
