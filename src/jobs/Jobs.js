@@ -14,10 +14,10 @@ import {
 const Jobs = props => {
   return (
     <div className={props.componentClass}>
-      <PageHeader>{"USA Jobs"}</PageHeader>
+      <PageHeader className="App-title">{"USA Jobs"}</PageHeader>
       {props.jobDetails.length ? (
         <Panel>
-          <Tabs defaultActiveKey={3} id="uncontrolled-tab-example">
+          <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
             <Tab eventKey={1} title="Jobs">
               {props.jobDetails.map(job => (
                 <ListGroup key={job.id}>

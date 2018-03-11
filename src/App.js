@@ -153,7 +153,7 @@ class App extends Component {
                   name="title"
                   value={this.state.title}
                   onChange={this.onInputChange}
-                  placeholder="enter title or keyword"
+                  placeholder="Title or Keyword"
                   required
                 />
                 <ControlLabel>State</ControlLabel>{" "}
@@ -162,7 +162,7 @@ class App extends Component {
                   name="location"
                   value={this.state.location}
                   onChange={this.onInputChange}
-                  placeholder="type or use dropdown"
+                  placeholder="Type or Dropdown"
                   list="States"
                   required
                 />

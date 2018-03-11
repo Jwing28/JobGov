@@ -1,3 +1,8 @@
+.App-title {
+  font-family: sans-serif;
+  color: darkblue;
+}
+
 .App-user-input {
   display: flex;
   background: lightblue;
@@ -7,29 +12,31 @@
 
 .App-jobs {
   flex: 0 0 100%;
-  border-right: 2px solid lightblue;
   overflow: scroll;
   height: 90vh;
+  border-left: 1px solid lightblue;
+  border-bottom: 1px solid lightblue;
 }
 
 .form-group {
   text-align: center;
   width: 100%;
-  padding: 1% 0;
+  padding: 1%;
 }
 
 .form-group * {
-  margin-right: 1%;
+  margin: 1%;
 }
 
 /* required, by default react-bootstrap has inline form width as auto */
 .form-control {
-  width: 20% !important;
+  min-width: 16% !important;
+  margin: 0 auto;
 }
 
 /* required, by default react-bootstrap has inline form width as auto */
 .btn-primary {
-  width: 10% !important;
+  min-width: 10% !important;
 }
 
 .col-md-10.col-xs-12 {
