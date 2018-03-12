@@ -15,7 +15,13 @@
   overflow: scroll;
   height: 90vh;
   border-left: 1px solid lightblue;
-  border-bottom: 1px solid lightblue;
+  padding-left: 5%;
+}
+
+.panel-primary,
+.panel-success,
+.panel-danger {
+  margin-bottom: 0;
 }
 
 .form-group {
@@ -39,10 +45,17 @@
   min-width: 10% !important;
 }
 
+/* google map */
+.col-md-9.col-xs-12 {
+  padding-left: 0px;
+}
+
+/*  */
 .col-md-10.col-xs-12 {
   padding-right: 0px;
 }
 
+/* blue element containing form */
 .col-md-2.col-xs-12 {
   background-color: lightblue;
   margin-top: 0px;

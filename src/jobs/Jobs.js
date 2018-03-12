@@ -16,7 +16,7 @@ const Jobs = props => {
     <div className={props.componentClass}>
       <PageHeader className="App-title">{"USA Jobs"}</PageHeader>
       {props.jobDetails.length ? (
-        <Panel>
+        <Panel bsStyle="primary">
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
             <Tab eventKey={1} title="Jobs">
               {props.jobDetails.map(job => (
