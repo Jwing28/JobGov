@@ -1,11 +1,6 @@
 .App {
-  border: 1px solid lightblue;
   padding: 0;
-}
-
-.App-title {
-  font-family: sans-serif;
-  color: darkblue;
+  width: 100%;
 }
 
 .App-user-input {
@@ -13,6 +8,22 @@
   background: lightblue;
   flex-direction: row;
   justify-content: center;
+}
+
+/* App logo */
+.App-label.control-label {
+  position: absolute;
+  left: 1%;
+  top: 15%;
+  font-size: 3rem;
+  color: white;
+  font-family: serif;
+  border-bottom: 2px solid red;
+}
+
+.jumbotron {
+  height: 90vh;
+  width: 25vw;
 }
 
 .App-jobs {

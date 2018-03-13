@@ -2,19 +2,11 @@ import React from "react";
 import formatDate from "../utils/utils";
 import Fun from "./fun/Fun";
 import Crime from "./crime/Crime";
-import {
-  Panel,
-  PageHeader,
-  ListGroup,
-  ListGroupItem,
-  Tab,
-  Tabs
-} from "react-bootstrap";
+import { Panel, ListGroup, ListGroupItem, Tab, Tabs } from "react-bootstrap";
 
 const Jobs = props => {
   return (
     <div className={props.componentClass}>
-      <PageHeader className="App-title">{"USA Jobs"}</PageHeader>
       {props.jobDetails.length ? (
         <Panel bsStyle="primary">
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">

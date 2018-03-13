@@ -12,6 +12,7 @@ import {
   FormGroup,
   FormControl,
   Grid,
+  Jumbotron,
   Row,
   Tooltip
 } from "react-bootstrap";
@@ -24,6 +25,7 @@ class App extends Component {
     coordinates: [],
     cityAttractions: [],
     stateCrimeData: [],
+    noResults: true,
     error: false
   };
 
@@ -49,6 +51,10 @@ class App extends Component {
     if (this.state.error) {
       this.setState({ error: !this.state.error });
     }
+
+    // clear default text & show search results
+    //once it's clicked you want it to always show results.
+    this.setState({ noResults: false });
 
     axios
       .get(crimeURL, {
@@ -140,6 +146,27 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
+  renderErrorToolTip = () => (
+    <Tooltip placement="right" className="in" id="tooltip-right">
+      Sorry, we could not find that job, please attempt again.
+    </Tooltip>
+  );
+
+  renderJumboTron = () => (
+    <Jumbotron>
+      <h1>Hello!</h1>
+      <h2>Looking for a government job?</h2>
+      <h3>Want to learn about the city too?</h3>
+      <h3>You have come to the right place!</h3>
+      <ol>
+        <li>Enter the job title</li>
+        <li>Enter the state</li>
+        <li>Click Submit</li>
+        <li>You are done! See results</li>
+      </ol>
+    </Jumbotron>
+  );
+
   render() {
     return (
       <Grid className="App">
@@ -147,6 +174,7 @@ class App extends Component {
           <Col xs={12} md={12}>
             <Form onSubmit={this.onSubmit} className="App-user-input" inline>
               <FormGroup>
+                <ControlLabel className="App-label">GovJobs</ControlLabel>
                 <ControlLabel>Job Title</ControlLabel>{" "}
                 <FormControl
                   type="text"
@@ -181,25 +209,23 @@ class App extends Component {
               </FormGroup>
             </Form>
           </Col>
-          {this.state.error ? (
-            <div>
-              <Tooltip placement="right" className="in" id="tooltip-right">
-                Sorry, we could not find that job, please attempt again.
-              </Tooltip>
-            </div>
-          ) : null}
+          {this.state.error ? this.renderErrorToolTip() : null}
         </Row>
         <Row className="show-grid">
           <Col xs={12} md={3}>
-            <Jobs
-              States={StateData.States}
-              jobType={this.state.title}
-              jobDetails={this.state.jobDetails}
-              cityDetails={this.state.cityAttractions}
-              crimeHistory={this.state.stateCrimeData}
-              location={this.state.location || null}
-              componentClass="App-jobs"
-            />
+            {this.state.noResults ? (
+              this.renderJumboTron()
+            ) : (
+              <Jobs
+                States={StateData.States}
+                jobType={this.state.title}
+                jobDetails={this.state.jobDetails}
+                cityDetails={this.state.cityAttractions}
+                crimeHistory={this.state.stateCrimeData}
+                location={this.state.location || null}
+                componentClass="App-jobs"
+              />
+            )}
           </Col>
           <Col xs={12} md={9}>
             <Map
