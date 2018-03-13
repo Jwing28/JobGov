@@ -142,7 +142,7 @@ class App extends Component {
 
   render() {
     return (
-      <Grid>
+      <Grid className="App">
         <Row className="show-grid">
           <Col xs={12} md={12}>
             <Form onSubmit={this.onSubmit} className="App-user-input" inline>

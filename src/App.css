@@ -1,3 +1,8 @@
+.App {
+  border: 1px solid lightblue;
+  padding: 0;
+}
+
 .App-title {
   font-family: sans-serif;
   color: darkblue;
@@ -11,16 +16,18 @@
 }
 
 .App-jobs {
-  flex: 0 0 100%;
-  overflow: scroll;
-  height: 90vh;
-  border-left: 1px solid lightblue;
+  height: 85vh;
   padding-left: 5%;
 }
 
-.panel-primary,
-.panel-success,
-.panel-danger {
+/* Form labels */
+.control-label {
+  font-size: 2rem;
+}
+
+.tab-content {
+  height: 70vh;
+  overflow: auto;
   margin-bottom: 0;
 }
 
@@ -48,11 +55,6 @@
 /* google map */
 .col-md-9.col-xs-12 {
   padding-left: 0px;
-}
-
-/*  */
-.col-md-10.col-xs-12 {
-  padding-right: 0px;
 }
 
 /* blue element containing form */
