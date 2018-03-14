@@ -29,6 +29,7 @@
 .App-jobs {
   height: 85vh;
   padding-left: 5%;
+  margin-top: 15%;
 }
 
 /* Form labels */
@@ -37,7 +38,7 @@
 }
 
 .tab-content {
-  height: 70vh;
+  height: 75vh;
   overflow: auto;
   margin-bottom: 0;
 }
@@ -85,6 +86,13 @@
     height: 90vh;
     width: 100vw;
     padding-left: 15%;
+  }
+
+  .App-jobs {
+    height: 85vh;
+    padding-left: 5%;
+    margin-top: 5%;
+    margin-right: 5%;
   }
 
   .form-control {
