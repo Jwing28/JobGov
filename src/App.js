@@ -55,7 +55,7 @@ class App extends Component {
     // clear default text & show search results
     //once it's clicked you want it to always show results.
     this.setState({ noResults: false });
-
+    console.log('crime url', crimeURL);
     axios
       .get(crimeURL, {
         headers: {

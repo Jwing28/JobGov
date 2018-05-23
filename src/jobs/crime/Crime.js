@@ -3,7 +3,7 @@ import { Panel, Table } from "react-bootstrap";
 
 const Crime = props => {
   if (!props.crimeHistory) {
-    return "Nothing to see here.";
+    return <h3>Unfortunately, crime estimates by state removed from government API.</h3>;
   }
 
   let mostRecentYear = props.crimeHistory.slice().pop();
